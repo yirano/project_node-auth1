@@ -1,6 +1,9 @@
 # Mac cruft
 .DS_Store
 
+# Remove users db
+users.db3
+
 # Logs
 logs
 *.log
