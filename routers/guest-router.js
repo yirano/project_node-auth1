@@ -36,7 +36,6 @@ router.post('/login', async (req, res, next) => {
 
     const user = await Users.findBy({ username }).first()
 
-    console.log("USER", user)
     if (!user) {
       return res.status(401).json(authError)
     }
