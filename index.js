@@ -3,8 +3,10 @@ const helmet = require('helmet')
 const cors = require('cors')
 const session = require('express-session')
 const KnexSessionStore = require('connect-session-knex')(session)
-const usersRouter = require('./routers/users-router')
 const db = require('./data/config')
+const restrict = require('./middlewares/restrict')
+const usersRouter = require('./routers/users-router')
+const userActivity = require('./routers/guest-router')
 
 const server = express()
 const PORT = process.env.PORT || 4000
@@ -21,7 +23,10 @@ server.use(session({
     createTable: true,
   })
 }))
-server.use('/api/users', usersRouter)
+
+
+server.use('/api/users', restrict(), usersRouter)
+server.use('/api/guest', userActivity)
 
 server.use((error, req, res, next) => {
   console.dir(error)
