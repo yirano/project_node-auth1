@@ -12,6 +12,7 @@ server.use(express.json())
 server.use('/api/users', usersRouter)
 
 server.use((error, req, res, next) => {
+  console.dir(error)
   res.status(500).json({ errorMessage: "Something went wrong" })
 })
 
