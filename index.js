@@ -21,7 +21,11 @@ server.use(session({
   store: new KnexSessionStore({
     knex: db,
     createTable: true,
-  })
+  }),
+  cookie: {
+    maxAge: 1 * 24 * 60 * 60 * 1000,
+    secure: false
+  }
 }))
 
 
