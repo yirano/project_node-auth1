@@ -1,7 +1,9 @@
-const router = require('express').Router()
+const express = require('express')
 const Users = require('../models/users-model')
 const bcrypt = require('bcryptjs')
 const restrict = require('../middlewares/restrict')
+
+const router = express.Router()
 
 router.get('/', restrict(), async (req, res, next) => {
   try {
@@ -40,8 +42,9 @@ router.post('/login', async (req, res, next) => {
 
   try {
 
-    const user = await Users.findBy({ username })
+    const user = await Users.findBy({ username }).first()
 
+    console.log("USER", user)
     if (!user) {
       return res.status(401).json(authError)
     }
