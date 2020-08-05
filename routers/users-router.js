@@ -49,17 +49,31 @@ router.post('/login', async (req, res, next) => {
       return res.status(401).json(authError)
     }
 
-    // const passwordValid = await bcrypt.compare(password, user.password)
+    const passwordValid = await bcrypt.compare(password, user.password)
 
-    // if (!passwordValid) {
-    //   return res.status(401).json(authError)
-    // }
+    if (!passwordValid) {
+      return res.status(401).json(authError)
+    }
 
     req.session.user = user
     res.json({ message: `Welcome ${user.username}! ID: ${user.id}` })
 
   } catch (error) {
     next(error)
+  }
+})
+
+router.get('/logout', async (req, res, next) => {
+  try {
+    req.session.destroy(err => {
+      if (err) {
+        next(err)
+      } else {
+        res.status(204).end()
+      }
+    })
+  } catch (error) {
+
   }
 })
 
