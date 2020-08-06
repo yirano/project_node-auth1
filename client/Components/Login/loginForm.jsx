@@ -1,9 +1,12 @@
 import React, { useState } from 'react'
+import {useHistory} from 'react-router-dom'
 import Axios from 'axios'
 
 const loginForm = (props) => {
   const [login, setLogin] = useState()
+  const history = useHistory()
 
+  console.log('history', history)
   const handleChange = e => {
     setLogin({ ...login, [e.target.name]: e.target.value })
   }
@@ -14,7 +17,7 @@ const loginForm = (props) => {
       .then(res => {
         console.log(res)
         localStorage.setItem('fake', 'Some stuff')
-        props.history.push('/api/users')
+        history.push('/users')
       })
       .catch(err => {
         console.log(err)

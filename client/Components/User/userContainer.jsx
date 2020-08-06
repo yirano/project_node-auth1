@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { axiosWithAuth } from '../Utils/axiosWithAuth'
+import Axios from 'axios'
 
 const userContainer = () => {
   const [users, setUsers] = useState()
   useEffect(() => {
-    axiosWithAuth().get('http://localhost:4000/api/users')
+    Axios.get('http://localhost:4000/api/users')
       .then(res => {
         console.log(res)
       })
