@@ -46,7 +46,7 @@ router.post('/login', async (req, res, next) => {
       return res.status(401).json(authError)
     }
 
-    req.session.user = user
+    // req.session.user = user
     res.json({ message: `Welcome ${user.username}! ID: ${user.id}` })
 
   } catch (error) {
